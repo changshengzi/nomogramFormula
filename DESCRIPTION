@@ -1,0 +1,14 @@
+Package: nomogramFormula
+Type: Package
+Title: Get total points and probability for nomogram
+Version: 1.0.0.0000
+Description: Caculate total points and probability for nomogram, by polynomial regression.
+Author: Jing Zhang, Zhi Jing
+Maintainer: Jing Zhang<zj391120@163.com>
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    crayon,
+    tmcn
+RoxygenNote: 6.1.1
