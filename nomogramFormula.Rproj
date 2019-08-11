@@ -1,22 +1,11 @@
-Version: 1.0
-
-RestoreWorkspace: No
-SaveWorkspace: No
-AlwaysSaveHistory: Default
-
-EnableCodeIndexing: Yes
-UseSpacesForTab: Yes
-NumSpacesForTab: 4
-Encoding: UTF-8
-
-RnwWeave: Sweave
-LaTeX: pdfLaTeX
-
-AutoAppendNewline: Yes
-StripTrailingWhitespace: Yes
-
-BuildType: Package
-PackageUseDevtools: Yes
-PackageInstallArgs: --no-multiarch --with-keep.source
-PackageCheckArgs: -as-cran
-PackageRoxygenize: rd,collate,namespace
+library(devtools)
+document()
+install()
+use_package("tmcn")
+#commit
+echo "# nomogramFormula" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/yikeshu0611/nomogramFormula.git
+git push -u origin master
