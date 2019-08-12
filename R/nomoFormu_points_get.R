@@ -50,7 +50,7 @@ nomoFormu_points_get <- function(nomogram,power){
     names(nomo.i)="a"
     points.i=nomo.i$a$points
     names(points.i)=NULL
-    value.i=as.numeric(unlist(nomo.i$a[var.i %==% names(nomo.i$a)]))
+    value.i=as.numeric(unlist(nomo.i$a[1]))
 ######caculate
     formu=paste0('points.i~',inner_Add_Symbol(paste0("I(value.i^",1:power,")")))
     reg=lm(as.formula(formu))
