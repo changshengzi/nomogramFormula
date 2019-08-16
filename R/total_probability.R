@@ -1,7 +1,8 @@
 #' @title Caculate nomogram total points
 #' @description caculate total probability
+#'
 #' @param totalpoints totalpoints after function nomoFormu_total_points
-#' @param formula formula after nomogramformula function
+#' @param digits default is 6
 #'
 #' @return dataframe
 #' @export
@@ -37,10 +38,12 @@
 #'                                       data = df)
 #' formu.prob <- nomoFormu_probability_get(nomogram = nomo,
 #'                                         power = 3)
-#' nomoFormu_total_probability(totalpoints = totalpoints,
+#' total_probability(totalpoints = totalpoints,
 #'                             formula = formu.prob)
 #' }
-nomoFormu_total_probability <- function(totalpoints,formula){
+total_probability <- function(totalpoints,digits=6){
+    options(digits=digits)
+    formula=Formula_probability
     nomoF.matrix=as.matrix(formula)
     for (i in 1:nrow(nomoF.matrix)) {
         if (i==1) score=data.frame(row.names = 1:length(totalpoints))
