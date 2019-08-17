@@ -43,9 +43,13 @@ formula_lp <- function(nomogram,power,digits=6){
     #total.points can only be changed in plot using points.label
     options(digits=digits)
     variable_part=nomogram["lp" == names(nomogram)]
+    id = 0
     #check langue chinese
     ChiCheck=any(grepl("Chinese",sessionInfo()))
-    id = 0
+    cat("\n")
+    if (ChiCheck) cat(crayon::red$bold(tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B: \u6839\u636E\u6839\u636E\u7EBF\u6027\u9884\u6D4B\u503C\u8BA1\u7B97\u603B\u5F97\u5206")))
+    if (!ChiCheck) cat(crayon::red$bold("Formula: caculate total points based on linear predictors"))
+    cat("\n")
     if (missing(power)){
         #missing power : choose power automatically
         power = 0
@@ -128,20 +132,20 @@ formula_lp <- function(nomogram,power,digits=6){
       id = id + 1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-              tmcn::toUTF8("\u5F97\u5230\u7684\u516C\u5F0F")),"\n")
+              tmcn::toUTF8("\u5F97\u5230\u7684\u65B9\u7A0B")),"\n")
       print(lm.result)
       Formula_lp<<-lm.result
       #test
       id = id +1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-          tmcn::toUTF8("\u7EBF\u6027\u9884\u6D4B\u503C\u7684R\u65B9\u548CRMSE")),"\n")
+          tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B\u7684R\u65B9\u548CRMSE")),"\n")
       print(test)
       #diff
       id = id +1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-          tmcn::toUTF8("\u6BD4\u8F83\u7EBF\u6027\u9884\u6D4B\u503C\u7684nomogram\u5F97\u5206\u548C\u9884\u6D4B\u5F97\u5206")),"\n")
+          tmcn::toUTF8("\u6BD4\u8F83nomogram\u5F97\u5206\u548C\u62DF\u5408\u5F97\u5206")),"\n")
       print(real_fit)
       
   }else{
@@ -156,13 +160,13 @@ formula_lp <- function(nomogram,power,digits=6){
       id = id +1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-          "R2 and RMSE for linear predictor"),"\n")
+          "R2 and RMSE for Formula"),"\n")
       print(test)
       #diff
       id = id +1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-          "difference between fit and nomogram points"),"\n")
+          "difference between nomogram and fit points"),"\n")
       print(real_fit)
 }
 }

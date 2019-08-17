@@ -49,8 +49,13 @@ formula_probability <- function(nomogram,power,digits=6){
         ttp_location=("total.points" %==% names(nomogram))
         prob_part=nomogram[(ttp_location+1):length(nomogram)]
     }
+    
     ChiCheck=any(grepl("Chinese",sessionInfo()))
     id = 0
+    cat("\n")
+    if (ChiCheck) cat(crayon::red$bold(tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B: \u6839\u636E\u603B\u5F97\u5206\u8BA1\u7B97\u6982\u7387")))
+    if (!ChiCheck) cat(crayon::red$bold("Formula: caculate probability based on total points"))
+    cat("\n")
     if (missing(power)){
         #missing power : choose power automatically
         power = 0
@@ -99,13 +104,12 @@ formula_probability <- function(nomogram,power,digits=6){
         }
         cat("\n")
         id = id +1
-        if (any(grepl("Chinese",sessionInfo()))){
+        if (ChiCheck)
             cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,
                                                                    tmcn::toUTF8(". power\u503C:"))),power,"\n")
-        }else{
+        if (!ChiCheck)
             cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,
                                                                    ". power chooses:")),power,"\n")
-        }
     }else{
         #exist power
         if (power<1) stop("power must not be less 1")
@@ -149,17 +153,24 @@ formula_probability <- function(nomogram,power,digits=6){
     rownames(test)=rownames(nomo.reslut)
     if (ChiCheck){
         #formula
+        Formula_probability<<-nomo.reslut
         id = id + 1
         cat("\n")
         cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-                                                        tmcn::toUTF8("\u5F97\u5230\u7684\u516C\u5F0F")),"\n")
-        print(nomo.reslut)
-        Formula_probability<<-nomo.reslut
-        #r2 rmse
+                                                        tmcn::toUTF8("\u5F97\u5230\u7684\u65B9\u7A0B")),"\n")
+        for (k in 1:nrow(nomo.reslut)) {
+            predic.i=nomo.reslut[k,]
+            cat(crayon::black$bgWhite(rownames(predic.i)),"\n")
+            rownames(predic.i)="total points"
+            predic.i = predic.i[,!is.na(predic.i)]
+            print(predic.i)
+        }
+        
+        #r2 test
         id = id +1
         cat("\n")
         cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-                                                        tmcn::toUTF8("R\u65B9\u548CRMSE")),"\n")
+                                                        tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B\u7684R\u65B9\u548CRMSE")),"\n")
         print(test)
         #diff
         if (length(diff)>50){
@@ -211,14 +222,21 @@ formula_probability <- function(nomogram,power,digits=6){
     }else{
         #formula
         id = id + 1
+        Formula_probability<<-nomo.reslut
         cat("\n")
         cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'. Formula')),"\n")
-        print(nomo.reslut)
-        Formula_probability<<-nomo.reslut
-        #r2 rmse
+        for (k in 1:nrow(nomo.reslut)) {
+            predic.i=nomo.reslut[k,]
+            cat(crayon::black$bgWhite(rownames(predic.i)),"\n")
+            rownames(predic.i)="total points"
+            predic.i = predic.i[,!is.na(predic.i)]
+            print(predic.i)
+        }
+        #r2 test
         id = id +1
         cat("\n")
-        cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'. R2 and RMSE')),"\n")
+        cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,
+                                                               '. R2 and RMSE for Formula')),"\n")
         print(test)
         #diff
         if (length(diff)>50){
@@ -258,7 +276,7 @@ formula_probability <- function(nomogram,power,digits=6){
             id = id +1
             cat("\n")
             cat(crayon::black$bgCyan("  "),
-                crayon::red$bold(paste0(id,'. compare the probability of nomogram and fit')),"\n")
+                crayon::red$bold(paste0(id,'. difference between nomogram  and fit probability ')),"\n")
             for (i in 1:length(real_fit_list)){
                 predic.i=real_fit_list[i]
                 cat(crayon::black$bgWhite(names(predic.i)),"\n")

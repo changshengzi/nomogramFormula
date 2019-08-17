@@ -47,7 +47,7 @@ library(nomogramFormula)
 formula_lp(nomogram = nomo)
 formula_lp(nomogram = nomo,power = 1)
 formula_lp(nomogram = nomo,power = 2)
-formula_lp(nomogram = nomo,power = 3)
+formula_lp(nomogram = nomo,power = 3,digits=6)
 }
 
 }

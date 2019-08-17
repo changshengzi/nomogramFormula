@@ -46,6 +46,10 @@ formula_points <- function(nomogram,power,digits=6){
     variable_part=nomogram[1:("total.points" %==% names(nomogram)-1)]
     id = 0
     ChiCheck=any(grepl("Chinese",sessionInfo()))
+    cat("\n")
+    if (ChiCheck) cat(crayon::red$bold(tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B: \u6839\u636E\u6BCF\u4E2A\u53D8\u91CF\u7684\u5F97\u5206\u8BA1\u7B97\u603B\u5F97\u5206")))
+    if (!ChiCheck) cat(crayon::red$bold("Formula: caculate total points based on each variable"))
+    cat("\n")
     if (missing(power)){
         #missing power : choose power automatically
         power = 0
@@ -183,7 +187,7 @@ formula_points <- function(nomogram,power,digits=6){
       id = id +1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-          "R2 and RMSE for each variable"),"\n")
+          "R2 and RMSE for Formula"),"\n")
       print(test)
       #diff
       id = id +1
