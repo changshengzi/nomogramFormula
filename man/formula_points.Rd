@@ -2,14 +2,14 @@
 % Please edit documentation in R/formula_points.R
 \name{formula_points}
 \alias{formula_points}
-\title{explore formula of points and each variable}
+\title{explore formula of points to each variable}
 \usage{
 formula_points(nomogram, power, digits = 6)
 }
 \arguments{
-\item{nomogram}{nomogram, after nomogram command from rms package}
+\item{nomogram}{nomogram, after nomogram command in rms package}
 
-\item{power}{if missing, power will be choose automatically}
+\item{power}{if missing, power will be choose automatically up to 100 based on all R2 equealling to 1}
 
 \item{digits}{default is 6}
 }
@@ -17,7 +17,7 @@ formula_points(nomogram, power, digits = 6)
 a global variable Formula_points, the formula of points and each variable
 }
 \description{
-explore the points formula and each variable to get best power.
+explore the points formula to each variable and get best power.
 }
 \examples{
 \donttest{

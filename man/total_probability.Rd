@@ -33,6 +33,7 @@ df <- data.frame(time,death,age,sex,weight)
 ddist <- datadist(df)
 options(datadist='ddist')
 f <- cph(formula(Surv(time,death)~sex+age+weight),data=df,
+         linear.predictors=TRUE,
          x=TRUE,y=TRUE,surv=TRUE,time.inc=3)
 surv <- Survival(f)
 nomo <- nomogram(f,
@@ -42,13 +43,9 @@ nomo <- nomogram(f,
                  funlabel=c("1-Year Survival Prob",
                             "2-Year Survival Prob"))
 library(nomogramFormula)
-formu.points <- nomoFormu_points_get(nomogram = nomo,
-                                     power = 1)
-totalpoints <- nomoFormu_total_points(formula = formu.points,
-                                      data = df)
-formu.prob <- nomoFormu_probability_get(nomogram = nomo,
-                                        power = 3)
-total_probability(totalpoints = totalpoints,
-                            formula = formu.prob)
+formula_lp(nomo)
+totalpoints <- total_points(lp=f$linear.predictors)
+formula_probability(nomo) 
+total_probability(totalpoints = totalpoints)
 }
 }

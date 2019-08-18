@@ -7,9 +7,9 @@
 formula_lp(nomogram, power, digits = 6)
 }
 \arguments{
-\item{nomogram}{nomogram after nomogram command from rms package}
+\item{nomogram}{nomogram after nomogram command in rms package}
 
-\item{power}{if missing, power will be choose automatically}
+\item{power}{if missing, power will be choose automatically up to 100 based on all R2 equealling to 1}
 
 \item{digits}{default is 6}
 }

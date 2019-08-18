@@ -1,8 +1,8 @@
 #' @title explore formula of total points and linear predictors
 #' @description explore the total points formula to linear predictors and get best power.
 #'
-#' @param nomogram nomogram after nomogram command from rms package
-#' @param power if missing, power will be choose automatically
+#' @param nomogram nomogram after nomogram command in rms package
+#' @param power if missing, power will be choose automatically up to 100 based on all R2 equealling to 1
 #' @param digits default is 6
 #'
 #' @return a global variable Formula_lp, the formula of total points and linear predictors
@@ -47,7 +47,7 @@ formula_lp <- function(nomogram,power,digits=6){
     #check langue chinese
     ChiCheck=any(grepl("Chinese",sessionInfo()))
     cat("\n")
-    if (ChiCheck) cat(crayon::red$bold(tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B: \u6839\u636E\u6839\u636E\u7EBF\u6027\u9884\u6D4B\u503C\u8BA1\u7B97\u603B\u5F97\u5206")))
+    if (ChiCheck) cat(crayon::red$bold(tmcn::toUTF8("\u62DF\u5408\u65B9\u7A0B: \u6839\u636E\u7EBF\u6027\u9884\u6D4B\u503C\u8BA1\u7B97\u603B\u5F97\u5206")))
     if (!ChiCheck) cat(crayon::red$bold("Formula: caculate total points based on linear predictors"))
     cat("\n")
     if (missing(power)){

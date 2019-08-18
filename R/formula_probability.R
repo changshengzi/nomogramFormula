@@ -1,8 +1,8 @@
 #' @title explore formula for probability and total points formula
 #' @description explore the probability formula to total points and get the best power.
 #'
-#' @param nomogram nomogram after nomogram command from rms package
-#' @param power power, if missing, power will be choose automatically
+#' @param nomogram nomogram after nomogram command in rms package
+#' @param power if missing, power will be choose automatically up to 100 based on all R2 equealling to 1
 #' @param digits default is 6
 #' @importFrom utils sessionInfo
 #' @importFrom stats as.formula lm predict t.test
@@ -35,9 +35,9 @@
 #'                  funlabel=c("1-Year Survival Prob",
 #'                             "2-Year Survival Prob"))
 #' library(nomogramFormula)
-#' nomoFormu_probability(nomogram = nomo,power = 1)
-#' nomoFormu_probability(nomogram = nomo,power = 2)
-#' nomoFormu_probability(nomogram = nomo,power = 3)
+#' formula_probability(nomogram = nomo)
+#' formula_probability(nomogram = nomo,power = 2)
+#' formula_probability(nomogram = nomo,power = 3)
 #' }
 formula_probability <- function(nomogram,power,digits=6){
     options(digits=digits)

@@ -7,14 +7,14 @@
 total_points(data, lp, digits = 6)
 }
 \arguments{
-\item{data}{data must be no na}
+\item{data}{data must be with no NA}
 
 \item{lp}{linear predictors}
 
 \item{digits}{default is 6}
 }
 \value{
-Total Points
+total Points
 }
 \description{
 Caculate nomogram total points
@@ -44,7 +44,21 @@ nomo <- nomogram(f,
                  funlabel=c("1-Year Survival Prob",
                             "2-Year Survival Prob"))
 library(nomogramFormula)
-formu.points <- nomoFormu_points_get(nomogram = nomo,power = 1)
-total_points(formula = formu.points,data = df)
+#useing raw data to caculate total points
+formula_points(nomo)
+total_points(data=df)
+#using linear predictors to caculate total points
+f <- cph(formula(Surv(time,death)~sex+age+weight),data=df,
+         linear.predictors=TRUE,
+         x=TRUE,y=TRUE,surv=TRUE,time.inc=3)
+surv <- Survival(f)
+nomo <- nomogram(f,
+                 lp=TRUE,
+                 fun=list(function(x) surv(365,x),
+                          function(x) surv(365*2,x)),
+                 funlabel=c("1-Year Survival Prob",
+                            "2-Year Survival Prob"))
+formula_lp(nomo)
+total_points(lp=f$linear.predictors)
 }
 }

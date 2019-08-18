@@ -1,9 +1,9 @@
-#' @title explore formula of points and each variable
+#' @title explore formula of points to each variable
 #'
-#' @description explore the points formula and each variable to get best power.
+#' @description explore the points formula to each variable and get best power.
 #'
-#' @param nomogram nomogram, after nomogram command from rms package
-#' @param power if missing, power will be choose automatically
+#' @param nomogram nomogram, after nomogram command in rms package
+#' @param power if missing, power will be choose automatically up to 100 based on all R2 equealling to 1
 #' @param digits default is 6
 #'
 #' @return a global variable Formula_points, the formula of points and each variable
@@ -193,7 +193,7 @@ formula_points <- function(nomogram,power,digits=6){
       id = id +1
       cat("\n")
       cat(crayon::black$bgCyan("  "),crayon::red$bold(paste0(id,'.'),
-          "difference between fit and nomogram points"),"\n")
+          "difference between nomogram and fit points"),"\n")
       for (i in 1:length(real_fit_list)){
         predic.i=real_fit_list[i]
         cat(crayon::black$bgWhite(names(predic.i)),"\n")

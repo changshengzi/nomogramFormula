@@ -7,9 +7,9 @@
 formula_probability(nomogram, power, digits = 6)
 }
 \arguments{
-\item{nomogram}{nomogram after nomogram command from rms package}
+\item{nomogram}{nomogram after nomogram command in rms package}
 
-\item{power}{power, if missing, power will be choose automatically}
+\item{power}{if missing, power will be choose automatically up to 100 based on all R2 equealling to 1}
 
 \item{digits}{default is 6}
 }
@@ -44,8 +44,8 @@ nomo <- nomogram(f,
                  funlabel=c("1-Year Survival Prob",
                             "2-Year Survival Prob"))
 library(nomogramFormula)
-nomoFormu_probability(nomogram = nomo,power = 1)
-nomoFormu_probability(nomogram = nomo,power = 2)
-nomoFormu_probability(nomogram = nomo,power = 3)
+formula_probability(nomogram = nomo)
+formula_probability(nomogram = nomo,power = 2)
+formula_probability(nomogram = nomo,power = 3)
 }
 }
